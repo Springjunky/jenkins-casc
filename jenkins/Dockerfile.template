@@ -21,7 +21,7 @@ ENV TERM xterm
 ENV REF_DIR /usr/share/jenkins/ref
 
 #---------------------------------  install plugins in a regular way START ---------------------------------
-#COPY plugins.txt $REF_DIR/plugins.txt  
+COPY plugins.txt $REF_DIR/plugins.txt  
 RUN chown jenkins:jenkins $REF_DIR/plugins.txt
 RUN ls -la $REF_DIR/
 RUN /usr/local/bin/install-plugins.sh < $REF_DIR/plugins.txt

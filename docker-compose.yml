@@ -5,7 +5,7 @@ services:
   jenkins:
     build: 
       context: jenkins
-    container_name: jenkins-casc
+    container_name: jenkins-casc-${JENKINS_VERSION}
     ports:
       - 8080:8080 
     environment:
