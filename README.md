@@ -16,6 +16,7 @@ See https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README
 start with 
 ```
 prepareSetup.sh
+
 ```
 to set your jenkins-version
 
@@ -37,8 +38,13 @@ The file
 ```
 is mapped into the docker-container (/etc/jenkins-as-code/jenkinsconfig.yml)
 
-Use your favorite editor to change the yml-based configuration and just do a reload in jenkins. 
+Use your favorite editor to change the yml-based configuration and just do a reload in jenkins.
  
+#### Cache your plugins 
+Edit the created Dockerfile, see comments inside
+
+
+
  
 
 
