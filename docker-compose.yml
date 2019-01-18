@@ -1,0 +1,14 @@
+version: "3"
+
+
+services:
+  jenkins:
+    build: 
+      context: jenkins
+    container_name: jenkins-casc
+    ports:
+      - 8080:8080 
+    environment:
+      CASC_JENKINS_CONFIG:  /etc/jenkins-as-code/jenkinsconfig.yml 
+    volumes:
+      - ${PWD}/jenkins-as-code/:/etc/jenkins-as-code/

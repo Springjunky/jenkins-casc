@@ -1,0 +1,50 @@
+FROM jenkins/jenkins:JENKINS_VERSION
+
+USER root
+RUN DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        apt-transport-https  apt-utils  ca-certificates curl jq locales vim && \
+    rm -rf /var/lib/apt/lists/* && \
+    dpkg-reconfigure --frontend noninteractive locales && \
+    echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && \
+    locale-gen &&  update-locale LANG=en_US.UTF-8
+
+
+RUN mkdir -p /etc/jenkins-as-code &&  chmod a+rwx /etc/jenkins-as-code
+
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+ENV TERM xterm
+ENV REF_DIR /usr/share/jenkins/ref
+
+#---------------------------------  install plugins in a regular way START ---------------------------------
+#COPY plugins.txt $REF_DIR/plugins.txt  
+RUN chown jenkins:jenkins $REF_DIR/plugins.txt
+RUN ls -la $REF_DIR/
+RUN /usr/local/bin/install-plugins.sh < $REF_DIR/plugins.txt
+#---------------------------------  install plugins in a regular way END --------------------------------- 
+
+#-----------------------  install plugins from cache START -----------------------------------------
+# first use the script preLoadPlugins.sh
+#-------------------------------------------------------------------------
+# if you need a list of all your actual plugins use this to 
+# get all Plugins from an existing Jenins without Version (latest is used)
+#--------------------------------------------------------------------------
+# JENKINS_HOST=username:password@myhost.com:port
+# curl -sSL "http://$JENKINS_HOST/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | \
+#  perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/ ' | awk -F: '{ print $1 }' | sort'
+# ----------------------------------------------------
+# COPY plugins-CACHE_NAME/* /usr/share/jenkins/ref/plugins/
+#-----------------------  install plugins from cache END -----------------------------------------
+
+
+
+USER jenkins
+# Disable install and plugin wizard
+RUN echo JENKINS_VERSION > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+RUN echo JENKINS_VERSION  > /usr/share/jenkins/ref/jenkins.install.InstallUtil.lastExecVersion
+
+
