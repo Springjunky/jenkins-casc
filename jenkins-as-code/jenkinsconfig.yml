@@ -30,6 +30,12 @@ credentials:
               id: gitlab_token
               apiToken: "qwertyuiopasdfghjklzxcvbnm"
               description: "Gitlab Token"
+          - file:
+              scope: GLOBAL
+              id: secret_file_id
+              description: secret_file_id with dummy filename
+              fileName: "dummy" 
+              secretBytes: "{2LV43xh8/O8HFGGdu0bns0swAeMl+PGf7zVhZ/cPLMQ=}"
               
 unclassified:
   gitlabconnectionconfig:
