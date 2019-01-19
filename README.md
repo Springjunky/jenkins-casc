@@ -44,7 +44,7 @@ docker-compose down
 ./prepareSetup.sh
 # enter 2.89.2
 docker-compose up --build
-```
+``` 
  
 #### Cache your plugins 
 Use preLoadPlugins.sh and edit the created Dockerfile, see comments inside

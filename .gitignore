@@ -1,3 +1,5 @@
 /jenkins.env
 *.hpi
 *.jpi
+/.project
+/.env
