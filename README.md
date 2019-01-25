@@ -41,7 +41,7 @@ to switch between different versions of Jenkins (to evaluate the casc-plugin) do
 ```
 # switch to jenkins 2.89.2
 docker-compose down
-docker volumes prune
+docker volume prune
 ./prepareSetup.sh
 # enter 2.89.2
 docker-compose up --build
