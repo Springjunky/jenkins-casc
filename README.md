@@ -1,6 +1,6 @@
 ## jenkins-casc
 
-Jenkins Tryout configuration-as-code plugin in a Docker-Container based enviroment.
+Jenkins-Tryout configuration-as-code plugin in a Docker-Container based environment.
 
 #### What is configuration-as-code ?
 
@@ -41,6 +41,7 @@ to switch between different versions of Jenkins (to evaluate the casc-plugin) do
 ```
 # switch to jenkins 2.89.2
 docker-compose down
+docker volumes prune
 ./prepareSetup.sh
 # enter 2.89.2
 docker-compose up --build
